@@ -1,4 +1,4 @@
-# Nanodegree Engenheiro de Machine Learning
+# Nanodegree Cientista de Dados
 # Aprendizagem supervisionada
 ## Projeto: Encontrando doadores para a CharityML
 
