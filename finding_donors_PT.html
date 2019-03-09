@@ -13350,7 +13350,7 @@ Name: income, dtype: int64</pre>
 <span class="n">n_at_most_50k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">income</span> <span class="o">==</span> <span class="s1">&#39;&lt;=50K&#39;</span><span class="p">])</span>
 
 <span class="c1"># TODO: O percentual de indivíduos com remuneração anual superior à $50,000</span>
-<span class="n">greater_percent</span> <span class="o">=</span> <span class="n">n_greater_50k</span> <span class="o">/</span> <span class="n">n_records</span>
+<span class="n">greater_percent</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_greater_50k</span> <span class="o">/</span> <span class="n">n_records</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 
 <span class="c1"># Exibindo os resultados</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total number of records: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_records</span><span class="p">))</span>
@@ -13376,7 +13376,7 @@ Name: income, dtype: int64</pre>
 <pre>Total number of records: 45222
 Individuals making more than $50,000: 11208
 Individuals making at most $50,000: 34014
-Percentage of individuals making more than $50,000: 0.25%
+Percentage of individuals making more than $50,000: 24.78%
 </pre>
 </div>
 </div>
@@ -14016,7 +14016,7 @@ $$ F_{\beta} = (1 + \beta^2) \cdot \frac{precision \cdot recall}{\left( \beta^2 
 <p><strong>Randon Forest</strong></p>
 <ul>
 <li>O modelo Randon Forest pode ser aplicado no domínio médico para identificar uma doença baseado nos sintomas. Example: <a href="https://www.sciencedirect.com/science/article/pii/S2213158214001326">Detecção da Doença de Alzheimer</a>.</li>
-<li>Vantagem: Muito bom para datasets grandes, fornece estimativas da importância de recurso, pode ser executado em paralelo para acelerar o treinamento, reduz a variancia causada por Arvores de Decisão pela combinação de várias arvores de decisão.</li>
+<li>Vantagem: Muito bom para datasets grandes, fornece estimativas da importância de recurso, pode ser executado em paralelo para acelerar o treinamento, reduz a variancia causada por Arvores de Decisão pela combinação de várias arvores de decisão, Segundo (Díaz-Uriarte &amp; de Andrés 2006), Forest Random apresenta uma série de características que a tornam ideal para bases de dados de expressão gênica: pode ser usada quando há muito mais atributos do que exemplos; pode ser usada para problemas de duas classes ou problemas multi-classe; tem um bom desempenho preditivo mesmo quando a maioria das variáveis preditivas são ruídos e, portanto, não necessita de uma pré-seleção de genes; não superajusta; pode lidar com uma mistura de atributos nominais e numéricos e há pouca necessidade de ajustar os parâmetros para alcançar um bom desempenho, trecho retirado da tese de mestrado: <a href="http://www.teses.usp.br/teses/disponiveis/95/95131/tde-15102013-183234/en.php">Thais Mayumi Oshiro</a>.</li>
 <li>Desvantagem: Tempo de previsão relativamente alto.</li>
 <li>Candidato: O modelo Randon Forest fornece um bom desempenho quado existem variáveis categóricas. Como existem cerca de 45.000 entradas, Random Forest pode treinar muito melhor.</li>
 </ul>
@@ -14024,14 +14024,15 @@ $$ F_{\beta} = (1 + \beta^2) \cdot \frac{precision \cdot recall}{\left( \beta^2 
 <ul>
 <li>Gradient Boosting pode ser aplicado em algoritmos de ranking, como a classificação de buscas por mecanismos de busca. Example: <a href="https://papers.nips.cc/paper/3270-mcrank-learning-to-rank-using-multiple-classification-and-gradient-boosting.pdf">McRank: Learning to Rank Using Multiple
 Classification and Gradient Boosting</a>.</li>
-<li>Vantagem: Muito bom para datasets grandes, reduz o viés e a variação, combinas vários preditores fracos para um construir um pretidor forte.</li>
+<li>Vantagem: Muito bom para datasets grandes, reduz o viés e a variação, combinas vários preditores fracos para um construir um pretidor forte, o Metodo Gradient Boosting fornece excelentes resultados em termos de precisão e generelização, além disso, oferece insights adicionais sobre o design do modelo resultante, permitindo investigações e análises mais profundas dos efeitos do modelo. <a href="https://www.frontiersin.org/articles/10.3389/fnbot.2013.00021/full">Gradient boosting machines, a tutorial</a>. </li>
 <li>Desvantagem: Tempo de treinamento relativamente alto, over-fitting se o data ser for muito pequeno.</li>
 <li>Candidato: os dados que temos é relativamente grande e limpo, então Gradient Boosting é aplicavél para este cenário.</li>
 </ul>
 <p><strong>Logistic Regression</strong></p>
 <ul>
 <li>Logistic Regression é muito usado no caso de problemas de classificação binária, sendo um exemplo muito comum se um usuário vai comprar um produto ou nao.</li>
-<li>Vantagem: Rápido no tempo de treinamento e previsão, dá bons resultados em casos de poucas varáveis.</li>
+<li>Vantagem: Rápido no tempo de treinamento e previsão, dá bons resultados em casos de poucas varáveis. Segundo Hosmer e Lemeshow (1989), a técnica de regressão logística tornouse um método padrão de análise de regressão para variáveis medidas de forma dicotômica, especialmente nas áreas das ciências da saúde. O mesmo modelo pode ser utilizado com enfoque discriminatório, conforme descrevem Krzanowski (1988) e McLachlan (1992). Esses autores argumentam que o modelo logístico de discriminação pode ser utilizado de forma bem mais geral, pois não faz suposições quanto à forma funcional das variáveis independentes, e o número de parâmetros envolvidos no processo de estimação provavelmente será menor. <a href="http://www.scielo.br/scielo.php?pid=S1415-65552002000300007&amp;script=sci_arttext&amp;tlng=es">João Alberto Minussi; Cláudio Damacena; Walter Lee Ness Jr et al.</a>.</li>
+<li>Desvantagem: Assume limite de decisão linear, não pode decodificar relações complexas entre os recursos.</li>
 <li>Candidato: Problemas de classificação binária com dados limpos, todas as condições favoráveis para uma Logistic Regression.</li>
 </ul>
 
@@ -14598,7 +14599,8 @@ Final F-score on the testing data: 0.7518
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Resposta:</strong> Os 5 atributos apresentados pela visualização estão muito próximos do que eu previ. Embora a <code>occupation</code> não pareça estar causando muito efeito na renda, como eu pensava, além disso, a qualificação educacional não parece ser maior do que a idade em importancia que é inesperada.</p>
+<p><strong>Resposta:</strong> Os 5 atributos apresentados pela visualização estão muito próximos do que eu previ. Embora a <code>occupation</code> não pareça estar causando muito efeito na renda, como eu pensava, além disso, a qualificação educacional não parece ser maior do que a idade em importancia que é inesperada.
+O único atributo que eu não escolhi foi o marital-status_Married, essa escolha aconteceu, pois provavelmente pessoas casadas tendem a serem mais ligadas a causas sociais, muitos participam de comunidades, mesmo isso não sendo uma ação limitada a pessoas casadas.</p>
 
 </div>
 </div>
